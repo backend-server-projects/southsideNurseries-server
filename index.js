@@ -196,7 +196,7 @@ app.get("/blogs", async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
-// Get all products
+// Get one blog
 app.get("/blogs/:id", async (req, res) => {
   const id = req.params.id
   const filter = { _id: mongoose.isObjectIdOrHexString(id) };
@@ -210,7 +210,7 @@ app.get("/blogs/:id", async (req, res) => {
   }
 });
 
-// Update a product
+// Update a blog
 app.put("/blogs/:id", verifyToken, async (req, res) => {
   try {
     const data = req.body;
@@ -225,11 +225,11 @@ app.put("/blogs/:id", verifyToken, async (req, res) => {
   }
 });
 
-// Delete a product
-app.delete("/products/:id", verifyToken, async (req, res) => {
+// Delete a blog
+app.delete("/blogs/:id", verifyToken, async (req, res) => {
   
   try {
-    const product = await Product.findByIdAndDelete(req.params.id);
+    const product = await Blogs.findByIdAndDelete(req.params.id);
     res.json(product);
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error" });
